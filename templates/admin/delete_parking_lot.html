@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block title %}
+    Delete Parking Lot
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1 style="align-items: center;">Delete Parking Lot</h1>
+<p>Are you sure you want to delete the parking lot "{{ parking_lot.prime_location_name }}"?</p>
+
+<form method="POST" action="{{ url_for('delete_parking_lot', lot_id=parking_lot.id) }}">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this parking lot? This action cannot be undone.')">Delete</button>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+</form>
+</div>
+{% endblock %}
+

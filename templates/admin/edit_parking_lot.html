@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Parking Lot{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>Edit Parking Lot</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('edit_parking_lot', lot_id=lot.id) }}">
+                    <div class="mb-3">
+                        <label for="prime_location_name" class="form-label">Location Name</label>
+                        <input type="text" class="form-control" id="prime_location_name" name="prime_location_name"
+                               value="{{ lot.prime_location_name }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" name="address" rows="2" required>{{ lot.address }}</textarea>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="pin_code" class="form-label">PIN Code</label>
+                            <input type="text" class="form-control" id="pin_code" name="pin_code"
+                                   value="{{ lot.pin_code }}" required
+                                   pattern="[0-9]{6}" title="Please enter a valid 6-digit PIN code">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="price_per_hour" class="form-label">Price per Hour (Rs)</label>
+                            <input type="number" class="form-control" id="price_per_hour" name="price_per_hour"
+                                   value="{{ lot.price_per_hour }}" step="0.01" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="maximum_number_of_spots" class="form-label">Number of Parking Spots</label>
+                        <input type="number" class="form-control" id="maximum_number_of_spots"
+                               name="maximum_number_of_spots" value="{{ lot.maximum_number_of_spots }}" min="1" required>
+                        <small class="text-muted">Note: Reducing the number of spots will only work if the removed spots are not occupied.</small>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Parking Lot</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

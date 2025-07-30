@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Summary{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Parking System Overview</h2>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Revenue</h5>
+                    <p class="card-text display-4">&#8377;{{ total_revenue }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Bookings</h5>
+                    <p class="card-text display-4">{{ total_bookings }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Average Duration</h5>
+                    <p class="card-text display-4">{{ avg_duration }}h</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Current Status Card -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Current Parking Status</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h6>Total Spots</h6>
+                    <h4>{{ total_spots }}</h4>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h6>Occupied Spots</h6>
+                    <h4 class="text-danger">{{ occupied_spots }}</h4>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h6>Available Spots</h6>
+                    <h4 class="text-success">{{ available_spots }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+       
+        <div class="container mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Revenue by Location</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/png;base64,{{ revenue_chart }}" 
+                         class="img-fluid" 
+                         alt="Revenue by Location">
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="container mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Bookings Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/png;base64,{{ bookings_chart }}" 
+                         class="img-fluid" 
+                         alt="Bookings Distribution">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+
+{% endblock %}
