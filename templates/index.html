@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+
+<div class="background-image">
+    <div class="background-overlay"></div>
+    <div class="background-content"> 
+        <h1>Welcome to ParkEasy</h1>
+        <h2>Manage your parking needs with ease.</h2>
+        <p>Login or Register to get started.</p>
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+    </div> 
+</div>
+{% endblock %}

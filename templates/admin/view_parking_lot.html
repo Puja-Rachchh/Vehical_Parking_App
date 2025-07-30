@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %}View Parking Lot{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">View Parking Lot</h1>
+<div class="container">
+    <a href="{{url_for('edit_parking_lot', lot_id=parking_lot.id)}}" class="btn btn-secondary mb-3">Edit Parking Lot</a>
+   <a href="{{url_for('confirm_delete_parking_lot', lot_id=parking_lot.id)}}" class="btn btn-danger mb-3">Delete Parking Lot</a>
+    <h2>{{ parking_lot.prime_location_name }}</h2>
+    <p><strong>Address:</strong> {{ parking_lot.address }}</p>
+    <p><strong>PIN Code:</strong> {{ parking_lot.pin_code }}</p>
+    <p><strong>Price per Hour (Rs):</strong> {{ parking_lot.price_per_hour }}</p>
+    <p><strong>Maximum Number of Spots:</strong> {{ parking_lot.maximum_number_of_spots }}</p>
+    <h3>Parking Spots</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Spot Number</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for spot in parking_spots %}
+            <tr>
+                <td>{{ spot.spot_number }}</td>
+                <td>{% if spot.status == 'A' %}Available{% else %}Occupied{% endif %}</td>
+                <td>
+                    {% if spot.status == 'O'%}
+                    {% set reservation = reservations.get(spot.id) %}
+            {% if reservation %}
+                <a class="btn btn-primary" href="{{ url_for('view_parking_spot', reservation_id=reservation.id) }}">View</a>
+                {% endif %}
+                    {%else%}
+                    <button class="btn btn-secondary" disabled>Available</button>
+                    {% endif %}
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function viewParkingSpot(reservation) {
+        window.location.href = `/admin/view_parking_spot/${reservationId}`;
+    }
+</script>
+    
+{%endblock %}
