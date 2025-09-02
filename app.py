@@ -1,14 +1,15 @@
 # app.py
 from config import create_app, db, login_manager
 from backend.models import User, ParkingLot, ParkingSpot, ReserveParking
-
 app = create_app()
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-#import routes  # Import routes to register them with the app
+from backend.routes import init_routes
+init_routes(app)
+# import routes  # Import routes to register them with the app
 if __name__ == '__main__':
     with app.app_context():
         from backend.routes import init_routes
