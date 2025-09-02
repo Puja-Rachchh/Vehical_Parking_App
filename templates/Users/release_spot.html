@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Release Spot{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Release Parking Spot</h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Spot Number:</strong> {{ reservation.spot_id }}</li>
+                <li class="list-group-item"><strong>Vehicle Number:</strong> {{ reservation.vehicle_number }}</li>
+                <li class="list-group-item"><strong>Parking Time:</strong> {{ reservation.parking_timestamp.strftime('%Y-%m-%d %H:%M') }}</li>
+                <li class="list-group-item"><strong>Release Time:</strong> {{ current_time.strftime('%Y-%m-%d %H:%M') }}</li>
+                <li class="list-group-item"><strong>Estimated Cost:</strong> ₹{{ cost_preview }}</li>
+            </ul>
+
+            <form method="POST" class="mt-4 d-flex justify-content-between">
+                <button type="submit" class="btn btn-danger">Confirm Release</button>
+                <a href="{{ url_for('user_dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

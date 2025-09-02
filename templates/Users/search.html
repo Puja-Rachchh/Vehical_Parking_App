@@ -1,0 +1,41 @@
+<div class="container-fluid mb-4">
+  <form>
+    <select class="form-select mb-3" id="searchCriteria" name="searchCriteria">
+      <option value="location">Location</option>
+      <option value="pincode">Pincode</option>
+    </select>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Search by location or pincode" value="{{searchInput}}">
+      <button class="search btn-primary" type="submit" style="margin-left: 10px;">
+        <i class="fas fa-search"></i> 
+        Search
+    </button>
+
+  </form>
+</div>
+<style>
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #searchCriteria {
+        width: 300px;
+        padding: 5px;
+        margin-left: 10px;
+    }
+    #searchInput {
+        flex: 2;
+        width: 250px;
+        padding: 5px;
+        margin-left: 10px;
+    }
+    .search {
+        padding: 5px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+
+    }
+</style>

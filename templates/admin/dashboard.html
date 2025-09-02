@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Admin Dashboard</h1>
+<div class="container mb-3" style="text-align: center;">
+    <h1>Parking Lots</h1>
+</div>
+<table class="table">
+    <thead>
+        <tr><div class="card-header bg-primary text-white" >
+            <th scope="col" >ID</th>
+            <th scope="col">Location Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">PIN Code</th>
+            <th scope="col">Price per Hour (&#8377;)</th>
+            <th scope="col">Number of Spots available</th>
+            <th scope="col">Actions</th></div>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lot in parking_lot %}
+        <tr>
+            <th scope="row">{{ lot.id }}</th>
+            <td>{{ lot.prime_location_name }}</td>
+            <td>{{ lot.address }}</td>
+            <td>{{ lot.pin_code }}</td>
+            <td>{{ lot.price_per_hour }}</td>
+            
+            <td>
+                {% set available = lot.parking_spots|selectattr("status", "equalto", "A")|list|length %}
+                <span class="badge bg-{{ 'success' if available > 0 else 'danger' }}">
+                    {{ available }}/{{ lot.maximum_number_of_spots }}
+                </span>
+            </td>
+            <td>
+                <a class="btn btn-primary" href="{{ url_for('view_parking_lot', lot_id=lot.id) }}">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary"  onclick="addParkingLot()">
+        <i class="fas fa-plus" ></i>
+        Add Parking Lot
+    </a>
+    
+</div>
+<script>
+    
+
+    function addParkingLot() {
+        window.location.href = "/admin/add_parking_lot";
+    }
+    
+</script>
+{% endblock %}

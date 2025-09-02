@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}Parking Summary{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Your Parking Summary</h2>
+    
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Parkings</h5>
+                    <p class="card-text display-4">{{ total_parkings }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Hours</h5>
+                    <p class="card-text display-4">{{ total_hours }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100 bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Cost</h5>
+                    <p class="card-text display-4">&#8377;{{ total_cost }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        
+
+        <!-- Location Distribution Chart -->
+        <div class="container mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Most Visited Locations</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/png;base64,{{ location_chart }}" 
+                         class="img-fluid" 
+                         alt="Parking Location Distribution">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

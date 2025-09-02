@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}Parking Records{% endblock %}
+
+{% block content %}
+<!-- Parking Records Table -->
+    <div class="card mb-2" style="padding: 10px;">
+        <div class="card-header bg-primary text-white   align-items-center">
+            <h5 class="mb-3">All Parking Records</h5>
+            
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="parkingRecordsTable">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Location</th>
+                            <th>Spot</th>
+                            <th>Vehicle</th>
+                            <th>Entry Time</th>
+                            <th>Exit Time</th>
+                            <th>Duration</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in parking_records %}
+                        <tr>
+                            <td>{{ record.user.username }}</td>
+                            <td>{{ record.lot_name }}</td>
+                            <td>{{ record.spot_number }}</td>
+                            <td>{{ record.vehicle_number }}</td>
+                            <td>{{ record.parking_timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ record.leaving_timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ ((record.leaving_timestamp - record.parking_timestamp).total_seconds() / 3600)|round(1) }} hours</td>
+                            <td>&#8377;{{ "%.2f"|format(record.parking_cost) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

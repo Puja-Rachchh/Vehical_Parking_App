@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Parking Lots{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Available Parking Lots</h2>
+{% include 'Users/search.html' with context %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for lot in parking_lots %}
+    
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ lot.prime_location_name }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <i class="fas fa-map-marker-alt"></i> {{ lot.address }}<br>
+                    <i class="fas fa-hashtag"></i> PIN: {{ lot.pin_code }}
+                </p>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <strong>Price:</strong> ${{ "%.2f"|format(lot.price_per_hour) }}/hour
+                    </div>
+                    <div>
+                        <span class="badge bg-{{ 'success' if lot.available_spots > 0 else 'danger' }}">
+                            {{ lot.available_spots }}/{{ lot.maximum_number_of_spots }} spots available
+                        </span>
+                    </div>
+                </div>
+                {% if lot.available_spots > 0 %}
+                <a href="{{ url_for('reserve_spot', lot_id=lot.id) }}" class="btn btn-primary d-block">
+                    Reserve Spot
+                </a>
+                {% else %}
+                <button class="btn btn-secondary d-block" disabled>Full</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

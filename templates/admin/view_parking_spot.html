@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block title %}View Parking Spot{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Parking Spot Details</h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Spot Number:</strong> {{ reservation.spot_id }}
+                </li>
+                <li class="list-group-item">
+                    <strong>User ID:</strong> {{ reservation.user_id }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Username:</strong> {{ reservation.user.username }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Vehicle Number:</strong> {{ reservation.vehicle_number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Date/Time of Booking:</strong> {{ reservation.parking_timestamp.strftime('%Y-%m-%d %H:%M') }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Estimated Cost:</strong> ₹{{ Estimated_cost | round(2) }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
